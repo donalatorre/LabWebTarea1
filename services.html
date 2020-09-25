@@ -5,12 +5,50 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+		<style>
+div.active {
+	background-color: rgb(0,255,127);
+}
+
+.resu {
+	border: 1px;
+	border-radius: 5px;
+	height: 80px;
+	font-style: bold;
+	padding: 30px 20px 40px 20px;
+	margin-left: 40px;
+	margin-right: 20px;
+	background-color: 	rgb(30,144,255);
+}
+
+.content {
+	border: 1px;
+	border-radius: 5px;
+	height: 80px;
+	font-style: bold;
+	padding: 30px 20px 40px 20px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-right: 20px;
+	background-color: rgb(135,206,250);
+}
+
+.nmb {
+	position: absolute;
+	right: 40px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+</style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <title>Hello, world!</title>
   </head>
-  <body><div id="my-navbar">
+  <body><div id="js-grid-list">
     <h1 style="padding: 20px">Hello, world!</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,28 +77,56 @@
 </ul>
   </div>
 </nav>
-		<ul class="list-group">
-  <li class="list-group-item">Esta es una pagina web con bootstrap</li>
-  <li class="list-group-item">Tiene mas de 10 componentes</li>
-  <li class="list-group-item">Tiene un diseno dinamico muy amigable</li>
-  <li class="list-group-item">Motivamos el uso de bootstrap</li>
-  <li class="list-group-item">En la clase de Lab de Web</li>
+	<div>
+    <section class="lista" v-cloak>
 
+		<ul>
+			<li v-for="blog in universidades">
+				<div class="content" v-on:click=" blog.active = !blog.active " v-bind:class="{'active': blog.active}">
+					<a > {{ blog.nombre }} </a>
+					<a class="nmb"> {{ blog.numero }} </a>
+				</div>
+			</li>
+		</ul>
+		<div class="resu"> {{ universidades.reduce((x, y) => (x + (y.active? y.numero: 0)), 0) }} </div>
+
+</section>
 </div>
-    <!-- Optional JavaScript -->
+</div>
+  <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script>
-		var refs = new Vue({
-  el: '#my-navbar',
-  data: {
-    path: '/'
-  }
-})
+	var blog_list = new Vue({
+	el: '#js-grid-list',
+	data: {
+		path: '/',
+		universidades: [{
+			nombre: 'Web Development',
+			numero: 300,
+			active: true
+		}, {
+			nombre: 'Design',
+			numero: 400,
+			active: false
+		}, {
+			nombre: 'Integration',
+			numero: 250,
+			active: false
+		}, {
+			nombre: 'Training',
+			numero: 220,
+			active: false
+		}, {
+			nombre: 'Testing',
+			numero: 320,
+			active: false
+		}]
+	}
+});
 		</script>
   </body>
 </html>
-
